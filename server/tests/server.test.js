@@ -80,7 +80,7 @@ describe('GET /todos/:id', () => {
       .end(done);
   });
 
-  it('should not return todo doc', (done) => {
+  it('should not return todo doc created by other user', (done) => {
     request(app)
       .get(`/todos/${todos[1]._id.toHexString()}`)
       .set('x-auth', users[0].tokens[0].token)
@@ -130,7 +130,7 @@ describe('DELETE /todos/:id', () => {
       });
   });
 
-  it('should not remove a todo', (done) => {
+  it('should not remove a todo created by another user', (done) => {
     var hexId = todos[0]._id.toHexString();
 
     request(app)
@@ -190,7 +190,7 @@ describe('PATCH /todos/:id', () => {
       .end(done);
   });
 
-  it('should not update the todo', (done) => {
+  it('should not update the todo created by other user', (done) => {
     var hexId = todos[0]._id.toHexString();
     var text = 'This should be the new text';
 
